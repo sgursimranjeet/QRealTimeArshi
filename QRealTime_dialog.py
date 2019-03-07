@@ -358,6 +358,7 @@ class KoBoToolbox (QTableWidget):
         print('inside getTable',url)
         table=[]
         response = requests.request(method,url,proxies=getProxiesConf(),headers=self.getAuth(),verify=False)
+        print(response.status_code)
         if not response.status_code == 200:
                 return response, table
         try:
