@@ -195,11 +195,11 @@ class KoBoToolbox (QTableWidget):
         if form_key:
             message= 'Form Updated'
             method = 'POST'
-            url = kpi+'/api/v1/forms'
+            url = self.kpi+'/api/v1/forms'
         else:
             message= 'Created new form'
             method = 'POST'
-            url = kpi+'/api/v1/forms'
+            url = self.kpi+'/api/v1/forms'
         os.chdir(os.path.expanduser('~'))
         files = {'xls_file': (xForm, open(xForm, 'rb')),}
         response = requests.post(url,files=files,headers=self.getAuth())
