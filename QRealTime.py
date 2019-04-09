@@ -414,16 +414,16 @@ class QRealTime:
             
     def getFieldsModel(self,currentLayer):
         fieldsModel = []
-#        g_type= currentLayer.geometryType()
- #       fieldDef={'name':'GEOMETRY','type':'geopoint','bind':{'required':'true()'}}
-  #      fieldDef['Appearance']= 'maps'
-  #      if g_type==0:
-   #         fieldDef['label']='add point location'
-    #    elif g_type==1:
-     #       fieldDef['label']='Draw Line'
-      #      fieldDef['type']='geotrace'
-       #    fieldDef['label']='Draw Area'
-       #     fieldDef['type']='geoshape'
+        g_type= currentLayer.geometryType()
+        fieldDef={'name':'GEOMETRY','type':'geopoint','bind':{'required':'true()'}}
+        fieldDef['Appearance']= 'maps'
+        if g_type==0:
+            fieldDef['label']='add point location'
+        elif g_type==1:
+            fieldDef['label']='Draw Line'
+            fieldDef['type']='geotrace'
+            fieldDef['label']='Draw Area'
+            fieldDef['type']='geoshape'
         fieldsModel.append(fieldDef)
         i=0
         for field in currentLayer.fields():
