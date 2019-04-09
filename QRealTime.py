@@ -400,14 +400,18 @@ class QRealTime:
         self.dlg.getCurrentService().updateFields(layer)
         fieldDict= self.getFieldsModel(layer)
         print ('fieldDict',fieldDict)
-        surveyDict= {"name":layer.name(),"title":layer.name(),'VERSION':version,"instance_name": 'uuid()',"submission_url": '',
-        "default_language":'default','id_string':layer.name(),'type':'survey','children':fieldDict }
-        survey=create_survey_element_from_dict(surveyDict)
-        xml=survey.to_xml(validate=None, warnings=warnings)
-        os.chdir(os.path.expanduser('~'))
-        with open('Xform.xml','w') as xForm:
-            xForm.write(xml)
-        self.dlg.getCurrentService().sendForm(layer.name(),'Xform.xml')
+
+         surveyDict= {"$autoname":layer.name(), "$kuid":layer.name(), "required": false, "type": layer.name(), "name": [layer.name()] }
+
+ #       surveyDict= {"name":layer.name(),"title":layer.name(),'VERSION':version,"instance_name": 'uuid()',"submission_url": '',
+ #      "default_language":'default','id_string':layer.name(),'type':'survey','children':fieldDict }
+ #       survey=create_survey_element_from_dict(surveyDict)
+ #       xml=survey.to_xml(validate=None, warnings=warnings)
+ #       os.chdir(os.path.expanduser('~'))
+  #      with open('Xform.xml','w') as xForm:
+   #         xForm.write(xml)
+    #    self.dlg.getCurrentService().sendForm(layer.name(),'Xform.xml')
+         return surveyDict 
         
     def download(self,checked=False):
         if checked==True:
@@ -420,17 +424,16 @@ class QRealTime:
             
     def getFieldsModel(self,currentLayer):
         fieldsModel = []
-        g_type= currentLayer.geometryType()
-        fieldDef={'name':'GEOMETRY','type':'geopoint','bind':{'required':'true()'}}
-        fieldDef['Appearance']= 'maps'
-        if g_type==0:
-            fieldDef['label']='add point location'
-        elif g_type==1:
-            fieldDef['label']='Draw Line'
-            fieldDef['type']='geotrace'
-        else:
-            fieldDef['label']='Draw Area'
-            fieldDef['type']='geoshape'
+#        g_type= currentLayer.geometryType()
+ #       fieldDef={'name':'GEOMETRY','type':'geopoint','bind':{'required':'true()'}}
+  #      fieldDef['Appearance']= 'maps'
+  #      if g_type==0:
+   #         fieldDef['label']='add point location'
+    #    elif g_type==1:
+     #       fieldDef['label']='Draw Line'
+      #      fieldDef['type']='geotrace'
+       #    fieldDef['label']='Draw Area'
+       #     fieldDef['type']='geoshape'
         fieldsModel.append(fieldDef)
         i=0
         for field in currentLayer.fields():
@@ -441,14 +444,13 @@ class QRealTime:
                 continue
                 
             fieldDef = {}
-            fieldDef['name'] = field.name()
-            fieldDef['map'] = field.name()
-            fieldDef['label'] = field.alias() or field.name()
-            fieldDef['hint'] = ''
+            fieldDef['$autoname'] = field.name()
+            fieldDef['$kuid'] = field.name()
+            fieldDef['required'] = "false"
             fieldDef['type'] = QVariantToODKtype(field.type())
-            fieldDef['bind'] = {}
+            fieldDef['label'] = [field.name()]
 #            fieldDef['fieldWidget'] = currentFormConfig.widgetType(i)
-            fieldDef['fieldWidget']=widget.type()
+#            fieldDef['fieldWidget']=widget.type()
             print('getFieldModel',fieldDef['fieldWidget'])
             if fieldDef['fieldWidget'] in ('ValueMap','CheckBox','Photo','ExternalResource'):
                 if fieldDef['fieldWidget'] == 'ValueMap':
