@@ -202,7 +202,7 @@ class KoBoToolbox (QTableWidget):
             url = self.kpi+'/assets/'
         os.chdir(os.path.expanduser('~'))
         settings= {"description": "","sector": "Information/Media","country": "India","share-metadata":False}
-        files = {"name": sendForm(), "settings":self.settings, "asset_type": "survey" }
+        files = {"name": layer.name(), "settings":self.settings, "asset_type": "survey" }
         response = requests.post(url,files=files,headers=self.getAuth())
         if response.status_code== 201 or response.status_code == 200:
             self.iface.messageBar().pushSuccess(self.tr("KoBoToolbox plugin"),
