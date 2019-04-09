@@ -400,8 +400,7 @@ class QRealTime:
         self.dlg.getCurrentService().updateFields(layer)
         fieldDict= self.getFieldsModel(layer)
         print ('fieldDict',fieldDict)
-
-         surveyDict= {"$autoname":layer.name(), "$kuid":layer.name(), "required": false, "type": layer.name(), "name": [layer.name()] }
+        surveyDict= {"$autoname":layer.name(), "$kuid":layer.name(), "required": false, "type": layer.name(), "name": [layer.name()] }
 
  #       surveyDict= {"name":layer.name(),"title":layer.name(),'VERSION':version,"instance_name": 'uuid()',"submission_url": '',
  #      "default_language":'default','id_string':layer.name(),'type':'survey','children':fieldDict }
@@ -411,7 +410,7 @@ class QRealTime:
   #      with open('Xform.xml','w') as xForm:
    #         xForm.write(xml)
     #    self.dlg.getCurrentService().sendForm(layer.name(),'Xform.xml')
-         return surveyDict 
+         return surveyDict
         
     def download(self,checked=False):
         if checked==True:
