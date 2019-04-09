@@ -401,7 +401,17 @@ class QRealTime:
         fieldDict= self.getFieldsModel(layer)
         print ('fieldDict',fieldDict)
         surveyDict= {"$autoname":layer.name(), "$kuid":layer.name(), "required": false, "type": layer.name(), "name": [layer.name()] }
-        return surveyDict, fieldDict
+
+ #       surveyDict= {"name":layer.name(),"title":layer.name(),'VERSION':version,"instance_name": 'uuid()',"submission_url": '',
+ #      "default_language":'default','id_string':layer.name(),'type':'survey','children':fieldDict }
+ #       survey=create_survey_element_from_dict(surveyDict)
+ #       xml=survey.to_xml(validate=None, warnings=warnings)
+ #       os.chdir(os.path.expanduser('~'))
+  #      with open('Xform.xml','w') as xForm:
+   #         xForm.write(xml)
+    #    self.dlg.getCurrentService().sendForm(layer.name(),'Xform.xml') 
+
+        
         
     def download(self,checked=False):
         if checked==True:
