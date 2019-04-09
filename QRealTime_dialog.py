@@ -195,13 +195,14 @@ class KoBoToolbox (QTableWidget):
         if form_key:
             message= 'Form Updated'
             method = 'POST'
-            url = self.kpi+'/assets/'+xForm_id+'/deployment'
+            url = self.kpi+'/assets/'
         else:
             message= 'Created new form'
             method = 'POST'
-            url = self.kpi+'/assets/'+xForm_id+'/deployment'
+            url = self.kpi+'/assets/'
         os.chdir(os.path.expanduser('~'))
-        files = {'xls_file': (xForm, open(xForm, 'rb')),}
+        settings= {"description": "","sector": "Information/Media","country": "India","share-metadata":False}
+        files = {"name": sendForm(), "settings":self.settings, "asset_type": "survey" }
         response = requests.post(url,files=files,headers=self.getAuth())
         if response.status_code== 201 or response.status_code == 200:
             self.iface.messageBar().pushSuccess(self.tr("KoBoToolbox plugin"),
