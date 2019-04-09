@@ -450,7 +450,7 @@ class QRealTime:
             fieldDef['type'] = QVariantToODKtype(field.type())
             fieldDef['label'] = [field.name()]
 #            fieldDef['fieldWidget'] = currentFormConfig.widgetType(i)
-#            fieldDef['fieldWidget']=widget.type()
+            fieldDef['fieldWidget']=widget.type()
             print('getFieldModel',fieldDef['fieldWidget'])
             if fieldDef['fieldWidget'] in ('ValueMap','CheckBox','Photo','ExternalResource'):
                 if fieldDef['fieldWidget'] == 'ValueMap':
